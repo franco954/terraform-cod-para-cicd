@@ -1,0 +1,25 @@
+# Terraform files
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+*.tfplan
+.terraform/providers/
+.terraform/providers/registry.terraform.io/hashicorp/aws/3.76.1/windows_386/terraform-provider-aws_v3.76.1_x5.exe
+.terraform/providers/registry.terraform.io/hashicorp/aws/3.76.1/windows_386/terraform-provider-aws_v3.76.1_x5.exe
+
+# Local .terraform directory
+.terraform/
+
+# Ignore plan files
+*.tfplan
+
+# Ignore editor directories and files
+.vscode/
+.idea/
+*.swp
+*~ 
+
+# Ignore sensitive files
+*.pem
+*.key
