@@ -13,11 +13,12 @@ provider "aws" {
   secret_key = var.secret_key
 }
 
-resource "aws_s3_bucket" "pomodoro_bucket" {  # Cambié el nombre aquí
+// creacion bucket sitio estatico
+resource "aws_s3_bucket" "pomodoro_bucket" { 
   bucket = "pomodoro-website-bucket-s3"
 }
 
-resource "aws_s3_bucket_policy" "pomodoro_bucket_policy" {  # Cambié el nombre aquí
+resource "aws_s3_bucket_policy" "pomodoro_bucket_policy" {  
   bucket = aws_s3_bucket.pomodoro_bucket.id
 
   policy = jsonencode({
@@ -30,13 +31,15 @@ resource "aws_s3_bucket_policy" "pomodoro_bucket_policy" {  # Cambié el nombre 
         }
         Action = "s3:*"
         Resource = [
-          "${aws_s3_bucket.pomodoro_bucket.arn}/*",  # Cambié el nombre aquí
-          aws_s3_bucket.pomodoro_bucket.arn,  # Cambié el nombre aquí
+          "${aws_s3_bucket.pomodoro_bucket.arn}/*",  
+          aws_s3_bucket.pomodoro_bucket.arn, 
         ]
       },
     ]
   })
 }
+
+// creacion user para cicd desde github
 
 resource "aws_iam_user" "cicd_user" {
   name = "cicd-user"
@@ -62,8 +65,8 @@ resource "aws_iam_policy" "cicd_policy" {
           "s3:DeleteObject"
         ]
         Resource = [
-          "${aws_s3_bucket.pomodoro_bucket.arn}/*",  # Cambié el nombre aquí
-          aws_s3_bucket.pomodoro_bucket.arn,  # Cambié el nombre aquí
+          "${aws_s3_bucket.pomodoro_bucket.arn}/*",  
+          aws_s3_bucket.pomodoro_bucket.arn,  
         ]
       },
       {
